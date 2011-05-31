@@ -1,3 +1,41 @@
+
+Leveldb for Android
+========================================
+
+This project is Leveldb(http://code.google.com/p/leveldb/) porting for Android 
+This project aim to make Java API.
+
+Branching Model
+-------------------------
+
+master : release stable branch 
+develop:dev branch(not recommended)
+
+
+
+Release Note
+-------------------------
+
+2011/05/31 
+~~~~~~~~~~~~~~
+
+Project Created.and first commit
+this version contain "enable to build native code",with Android sample(get leveldb version and Toast it)
+
+
+put this project unser [ndk]/sources,and exec ndk-build.
+
+
+
+
+
+
+
+
+
+Abovetext is Original README. 
+========================================
+
 leveldb: A key-value store
 Authors: Sanjay Ghemawat (sanjay@google.com) and Jeff Dean (jeff@google.com)
 
