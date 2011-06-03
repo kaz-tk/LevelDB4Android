@@ -13,15 +13,15 @@ extern "C" {
  * Signature: ()[I
  */
 JNIEXPORT jintArray JNICALL Java_product_miyabi_android_leveldb_db_Database_VERSION
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
 
 /*
  * Class:     product_miyabi_android_leveldb_db_Database
- * Method:    _open
- * Signature: (Ljava/lang/String;)V
+ * Method:    OpenNative
+ * Signature: (Lproduct/miyabi/android/leveldb/db/options/Options;Ljava/lang/String;)Lproduct/miyabi/android/leveldb/db/Status;
  */
-JNIEXPORT void JNICALL Java_product_miyabi_android_leveldb_db_Database__1open
-  (JNIEnv *, jobject, jstring);
+JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_OpenNative
+  (JNIEnv *, jobject, jobject, jstring);
 
 #ifdef __cplusplus
 }

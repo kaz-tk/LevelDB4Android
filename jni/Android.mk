@@ -25,7 +25,7 @@ include $(CLEAR_VARS)
 LOCAL_CPP_EXTENSION:= cc
 LOCAL_MODULE:=leveldb-port
 
-PORT_SRC_FILES:= port_android.cc 
+PORT_SRC_FILES:= port_android.cc
 LOCAL_SRC_FILES=$(PORT_SRC_FILES:%=../port/%)
 
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../platforms/android-9/arch-arm/usr/include/ \
@@ -201,7 +201,10 @@ include $(BUILD_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE:= leveldb-java
-JNI_SRC_FILES:= database.cpp 
+
+JNI_SRC_FILES:= \
+	database.cpp \
+	jnihelper.cpp 
 
 
 LOCAL_SRC_FILES:=$(JNI_SRC_FILES) 
@@ -223,7 +226,7 @@ LOCAL_LD_LIBS:= -llog
 LOCAL_SHARED_LIBRARIES := liblog
 
 LOCAL_STATIC_LIBS:= -lstdlib
-LOCAL_STATIC_LIBRARIES:= leveldb-port leveldb-util  leveldb-table leveldb-db
+LOCAL_STATIC_LIBRARIES:=  leveldb-db leveldb-table leveldb-util leveldb-port  
 
 include $(BUILD_SHARED_LIBRARY)
 
