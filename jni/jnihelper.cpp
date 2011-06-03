@@ -15,13 +15,20 @@ jobject convertStatus(JNIEnv* env,leveldb::Status status){
     const char * charStatus = strStatus.c_str();
     jstring jstrStatus = env->NewStringUTF(charStatus);
 
-	jclass jstatuscls = env->FindClass("Lproduct/miyabi/android/leveldb/db/Status");
+	jclass jstatuscls = env->FindClass("product/miyabi/android/leveldb/db/Status");
+//	jclass jstatuscls = env->FindClass("Lproduct/miyabi/android/leveldb/db/Status;");
 	jmethodID jmethodIdInit;
-	if (jstatus==NULL ){
+	if (jstatuscls==NULL ){
 		return NULL;
 	}
+	/*
+	jmethodIdInit =  env->GetMethodID(jstatuscls,"factory","(Ljava/lang/String;)Lproduct/miyabi/android/leveldb/db/Status");
+	jstatus = env->CallStaticObjectMethod(jstatuscls,jmethodIdInit,jstrStatus);
+	*/
 	jmethodIdInit =  env->GetMethodID(jstatuscls,"<init>","(Ljava/lang/String;)V");
+	if(jmethodIdInit==NULL){
+		return NULL;
+	}
 	jstatus = env->NewObject(jstatuscls,jmethodIdInit,jstrStatus);
-
 	return jstatus;
 }

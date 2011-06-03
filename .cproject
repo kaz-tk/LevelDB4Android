@@ -36,6 +36,9 @@
 				</configuration>
 			</storageModule>
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.496840460" moduleId="org.eclipse.cdt.core.settings" name="Preference Configuration">
+				<macros>
+					<stringMacro name="LEVELDB_PLATFORM_ANDROID" type="VALUE_TEXT" value=""/>
+				</macros>
 				<externalSettings/>
 				<extensions>
 					<extension id="org.eclipse.cdt.core.VCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>

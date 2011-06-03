@@ -14,9 +14,9 @@ public class Database {
 	}
 	
 	String mDatabaseName;
-	public Database(String databaseName) {
-		// TODO Auto-generated constructor stub
-		mDatabaseName = databaseName;
+
+	public Database(){
+		
 	}
 	
 	public static native int[] VERSION();
@@ -26,9 +26,7 @@ public class Database {
 			String dbname
 	){
 		
-		
-		
-		return null;
+		return OpenNative(options, dbname);
 	}
 	
 	private native Status OpenNative(Options options,String dbname);

@@ -12,11 +12,12 @@
 #include <leveldb/db.h>
 #include <Database.h>
 #include <jnihelper.h>
-
+#include <android/log.h>
 leveldb::DB* db_;
 
 JNIEXPORT jintArray JNICALL Java_product_miyabi_android_leveldb_db_Database_VERSION
-  (JNIEnv *env, jobject clazz){
+  (JNIEnv *env, jclass clazz)
+{
 	jboolean bools;
 	jint jMajorVsn,jiMinorVsn;
 	jint* vsnArray;
@@ -37,13 +38,12 @@ JNIEXPORT jintArray JNICALL Java_product_miyabi_android_leveldb_db_Database_VERS
 JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_OpenNative
 (JNIEnv *env, jobject clazz, jobject options, jstring jdbname){
 
-
 	jboolean* isCopy;
 	const char* dbnamechar = env->GetStringUTFChars(jdbname,isCopy);
 	std::string* dbname = new std::string(dbnamechar);
     env->ReleaseStringUTFChars(jdbname,dbnamechar);
 
-
+    //__android_log_print(ANDROID_LOG_DEFAULT,"LevelDB","Path");
 
 	leveldb::Options opts;
     if (options != NULL) {
