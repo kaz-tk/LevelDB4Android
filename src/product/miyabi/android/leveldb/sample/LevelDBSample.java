@@ -1,6 +1,7 @@
 package product.miyabi.android.leveldb.sample;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,16 +18,19 @@ public class LevelDBSample extends Activity {
 	Database mDatabase;
 	
 	Button[] mButtons;
-	int NO_BUTTONS=2;
+	int NO_BUTTONS=4;
 	static final int ID_PUT_DATA=0;
 	static final int ID_GET_DATA=1;
+	static final int ID_PUT_DATAS=2;
+	static final int ID_GET_DATAS=3;
 	String mBtnText[]; 
-	
+	Activity mActivity;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity = this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
 
@@ -41,10 +45,13 @@ public class LevelDBSample extends Activity {
         mButtons = new Button[NO_BUTTONS];
         mButtons[ID_PUT_DATA] = (Button) findViewById(R.id.button1);
         mButtons[ID_GET_DATA] = (Button) findViewById(R.id.button2);
+        mButtons[ID_PUT_DATAS] = (Button) findViewById(R.id.button3);
+        mButtons[ID_GET_DATAS] = (Button) findViewById(R.id.button4);
         mBtnText = getResources().getStringArray(R.array.btntext);
-        
-        mButtons[ID_PUT_DATA].setText(mBtnText[ID_PUT_DATA]);
-        mButtons[ID_GET_DATA].setText(mBtnText[ID_GET_DATA]);
+
+        for(int i=0;i<NO_BUTTONS;i++){
+        	mButtons[i].setText(mBtnText[i]);
+        }
         
         mButtons[ID_PUT_DATA].setOnClickListener(new View.OnClickListener() {
 			
@@ -71,6 +78,25 @@ public class LevelDBSample extends Activity {
 				String[] value = new String[1];
 				Status status= mDatabase.Get( key,value);
 		        Toast.makeText(getApplicationContext(), status.toString() +":"+value[0],Toast.LENGTH_SHORT).show();
+				
+			}
+		});
+        
+        mButtons[ID_PUT_DATAS].setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				new PutsTask(mActivity).execute(mDatabase);
+			}
+		});
+        mButtons[ID_GET_DATAS].setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				AsyncTask<Database, Void, Long> task = new GetsTask(mActivity);
+				task.execute(mDatabase);
 				
 			}
 		});

@@ -18,4 +18,11 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout6" android:layout_height="wrap_content" android:orientation="vertical">
+        <TextView android:text="TextView" android:id="@+id/textView3" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+        <LinearLayout android:id="@+id/linearLayout7" android:layout_height="match_parent" android:layout_width="fill_parent">
+            <Button android:text="Button" android:id="@+id/button3" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="fill_parent" android:layout_margin="10px"></Button>
+            <Button android:text="Button" android:id="@+id/button4" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="fill_parent" android:layout_margin="10px"></Button>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
