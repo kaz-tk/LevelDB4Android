@@ -1,6 +1,10 @@
 package product.miyabi.android.leveldb.db;
 
+import android.util.Log;
+import android.widget.Toast;
 import product.miyabi.android.leveldb.db.options.Options;
+import product.miyabi.android.leveldb.db.options.ReadOptions;
+import product.miyabi.android.leveldb.db.options.WriteOptions;
 
 /**
  * @abstract Database API
@@ -14,9 +18,9 @@ public class Database {
 	}
 	
 	String mDatabaseName;
-	public Database(String databaseName) {
-		// TODO Auto-generated constructor stub
-		mDatabaseName = databaseName;
+
+	public Database(){
+		
 	}
 	
 	public static native int[] VERSION();
@@ -26,11 +30,66 @@ public class Database {
 			String dbname
 	){
 		
-		
-		
-		return null;
+		return OpenNative(options, dbname);
+	}
+
+	public void Release(String dbname){
+		ReleaseNative(dbname);
+	}
+
+	/**
+	 * 
+	 * @param IN key
+	 * @param IN value
+	 * @return
+	 */
+	public Status Put(String key,String value){
+		return PutNative(new WriteOptions(),mDatabaseName, key, value);
 	}
 	
-	private native Status OpenNative(Options options,String dbname);
 	
+	/**
+	 * 
+	 * @param IN writeopts
+	 * @param IN key
+	 * @param IN value
+	 * @return
+	 */
+	public Status Put(WriteOptions writeopts,String key,String value){
+		return PutNative(writeopts,mDatabaseName, key, value);
+	}
+	
+	/**
+	 * 
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public Status Get(String key,String[] value){
+		return Get(new ReadOptions(),key,value);
+	}
+	
+	/**
+	 * 
+	 * @param IN readopts
+	 * @param IN key
+	 * @param OUT value
+	 * @return Status Database Operation Result
+	 */
+	public Status Get(ReadOptions readopts,String key,String[] values){
+		
+		Status status = GetNative(readopts,mDatabaseName, key,values);
+		return status;
+	}
+	
+	
+	//-------------------------------------------
+	// Native Method
+	//-------------------------------------------
+	private native Status OpenNative(Options options,String dbname);
+	private native void ReleaseNative(String dbname);
+
+	private native Status PutNative(WriteOptions writeopts,String dbname,String key,String value);
+	private native Status GetNative(ReadOptions readopts,  String dbname,String key, String[] value);
+	private native Status DeleteNative(String dbname,String key,String value);
 }

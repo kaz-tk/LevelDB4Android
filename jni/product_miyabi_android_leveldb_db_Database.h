@@ -23,6 +23,38 @@ JNIEXPORT jintArray JNICALL Java_product_miyabi_android_leveldb_db_Database_VERS
 JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_OpenNative
   (JNIEnv *, jobject, jobject, jstring);
 
+/*
+ * Class:     product_miyabi_android_leveldb_db_Database
+ * Method:    ReleaseNative
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_product_miyabi_android_leveldb_db_Database_ReleaseNative
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     product_miyabi_android_leveldb_db_Database
+ * Method:    PutNative
+ * Signature: (Lproduct/miyabi/android/leveldb/db/options/WriteOptions;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lproduct/miyabi/android/leveldb/db/Status;
+ */
+JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_PutNative
+  (JNIEnv *, jobject, jobject, jstring, jstring, jstring);
+
+/*
+ * Class:     product_miyabi_android_leveldb_db_Database
+ * Method:    GetNative
+ * Signature: (Lproduct/miyabi/android/leveldb/db/options/ReadOptions;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)Lproduct/miyabi/android/leveldb/db/Status;
+ */
+JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_GetNative
+  (JNIEnv *, jobject, jobject, jstring, jstring, jobjectArray);
+
+/*
+ * Class:     product_miyabi_android_leveldb_db_Database
+ * Method:    DeleteNative
+ * Signature: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lproduct/miyabi/android/leveldb/db/Status;
+ */
+JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_DeleteNative
+  (JNIEnv *, jobject, jstring, jstring, jstring);
+
 #ifdef __cplusplus
 }
 #endif

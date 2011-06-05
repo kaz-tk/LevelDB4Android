@@ -21,12 +21,15 @@ public class Status {
 	}
 	
 	
-	private Status(String msg){
+	public Status(String msg){
 		//mDatabaseStatusCode = statusCode;
 		mMsg                = msg;
 	}
 
 	public Status factory( int statuscode , String msg){
+		return new Status( msg );
+	}
+	public Status factory( String msg){
 		return new Status( msg );
 	}
 	
@@ -40,6 +43,10 @@ public class Status {
 		
 	}
 	
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return mMsg;
+	}
 	
 }

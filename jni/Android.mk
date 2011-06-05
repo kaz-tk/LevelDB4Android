@@ -25,7 +25,9 @@ include $(CLEAR_VARS)
 LOCAL_CPP_EXTENSION:= cc
 LOCAL_MODULE:=leveldb-port
 
-PORT_SRC_FILES:= port_android.cc
+PORT_SRC_FILES:= port_android.cc \
+                 sha1_portable.cc
+
 LOCAL_SRC_FILES=$(PORT_SRC_FILES:%=../port/%)
 
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../platforms/android-9/arch-arm/usr/include/ \
@@ -55,18 +57,19 @@ LOCAL_MODULE:=leveldb-util
 
 UTIL_SRC_FILES:= \
 	arena.cc \
-	coding.cc \
-	logging.cc \
-	status.cc \
-	hash.cc \
-	testharness.cc \
-	env.cc \
 	cache.cc \
+	coding.cc \
 	comparator.cc \
+	crc32c.cc \
+	env.cc \
+	env_posix.cc \
+	hash.cc \
 	histogram.cc \
+	logging.cc \
 	options.cc \
-	testutil.cc \
-	crc32c.cc 
+	status.cc \
+	testharness.cc \
+	testutil.cc
 
 
 LOCAL_SRC_FILES=$(UTIL_SRC_FILES:%=../util/%)
@@ -160,19 +163,19 @@ LOCAL_MODULE:= leveldb-db
 #									version_edit_test.cc
 
 DB_SRC_FILES:=builder.cc \
-							log_reader.cc \
-							version_set.cc \
-							dbformat.cc \
-							write_batch.cc \
 							db_bench.cc \
-							log_writer.cc \
-							table_cache.cc \
 							db_impl.cc \
-							filename.cc \
-							memtable.cc \
-							version_edit.cc \
 							db_iter.cc \
-							repair.cc 
+							filename.cc \
+							log_reader.cc \
+							log_writer.cc \
+							memtable.cc \
+							repair.cc \
+							table_cache.cc \
+							dbformat.cc \
+							version_edit.cc \
+							version_set.cc \
+							write_batch.cc 
 
 LOCAL_SRC_FILES=$(DB_SRC_FILES:%=../db/%)
 
@@ -222,10 +225,10 @@ LOCAL_CFLAGS += $(LOCAL_C_INCLUDES:%=-I%) \
 	-DLEVELDB_PLATFORM_ANDROID \
 	-DARMV6_OR_7
 
-LOCAL_LD_LIBS:= -llog
-LOCAL_SHARED_LIBRARIES := liblog
+LOCAL_SHARED_LIBRARIES := -llog
+LOCAL_LD_LIBS:=  -llog
 
-LOCAL_STATIC_LIBS:= -lstdlib
+LOCAL_STATIC_LIBS:= -lstdlib -llog
 LOCAL_STATIC_LIBRARIES:=  leveldb-db leveldb-table leveldb-util leveldb-port  
 
 include $(BUILD_SHARED_LIBRARY)
