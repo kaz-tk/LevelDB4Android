@@ -5,7 +5,11 @@
     <string-array name="btntext">
         <item>Put(Hello , World)</item>
         <item>Get(Hello,&amp;Value)</item>
-        <item>Put(0-10000,10000-20000)</item>
-        <item>Get(0-10000)</item>
+        <item>Put</item>
+        <item>Get</item>
+    </string-array>
+    <string-array name="itemlabel">
+        <item>Operation : Put / Get Single Data</item>
+        <item>Operation : Put / Get Multi Data</item>
     </string-array>
 </resources>

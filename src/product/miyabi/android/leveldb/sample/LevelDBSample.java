@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import product.miyabi.android.leveldb.R;
@@ -16,6 +17,13 @@ import product.miyabi.android.leveldb.db.options.ReadOptions;
 import product.miyabi.android.leveldb.db.options.WriteOptions;
 public class LevelDBSample extends Activity {
 	Database mDatabase;
+	
+
+	TextView[] mLabel;
+	int NO_LABEL  =2;
+	static final int ID_OP_SINGLE=0;
+	static final int ID_OP_MULTI=1;
+	String mLabelText[];
 	
 	Button[] mButtons;
 	int NO_BUTTONS=4;
@@ -41,6 +49,15 @@ public class LevelDBSample extends Activity {
         Toast.makeText(getApplicationContext(), "LevelDB Version:"+vsn[0]+"."+vsn[1],Toast.LENGTH_SHORT).show();
         Toast.makeText(getApplicationContext(), status.toString(),Toast.LENGTH_SHORT).show();
         Log.i("LevelDB","Path");
+        
+        mLabel     = new TextView[NO_LABEL];
+        mLabel[ID_OP_SINGLE] = (TextView) findViewById(R.id.textView2);
+        mLabel[ID_OP_MULTI] = (TextView) findViewById(R.id.textView3);
+        mLabelText = getResources().getStringArray(R.array.itemlabel);
+        for(int i=0;i<NO_LABEL;i++){
+        	mLabel[i].setText(mLabelText[i]);
+        }
+        
         
         mButtons = new Button[NO_BUTTONS];
         mButtons[ID_PUT_DATA] = (Button) findViewById(R.id.button1);
