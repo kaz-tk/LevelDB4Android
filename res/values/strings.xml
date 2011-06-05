@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World!</string>
-    <string name="app_name">LevelDB-API-Java</string>
+    <string name="app_name">Level DB Sample</string>
+    <string-array name="btntext">
+        <item>Put(Hello , World)</item>
+        <item>Get(Hello,&amp;Value)</item>
+        <item>Put</item>
+        <item>Get</item>
+    </string-array>
+    <string-array name="itemlabel">
+        <item>Operation : Put / Get Single Data</item>
+        <item>Operation : Put / Get Multi Data</item>
+    </string-array>
 </resources>
