@@ -11,10 +11,15 @@ import android.widget.Toast;
 
 public abstract class BaseTask extends AsyncTask<Database, Integer, Long> {
 
-	Message msg = new Message();
+	protected Message msg = new Message();
 	protected Activity mActivity;
 	protected ProgressDialog mProgressDialog;
 	private ProgressUpdateThread mProgressUpdateThread;
+	
+	protected final int MSG_WHAT_PROGRESS_FIRST = 0;
+	protected final int MSG_WHAT_PROGRESS_SECOND = 1;
+	
+	
 	
 	public interface TaskFinishedCallback{
 		void onFinished();
@@ -23,10 +28,20 @@ public abstract class BaseTask extends AsyncTask<Database, Integer, Long> {
 	Handler mHander = new Handler(){
 		
 		@Override
-		public void handleMessage(Message msg) {
+		public void handleMessage(final Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			mProgressDialog.setProgress(msg.what);
+			
+			switch(msg.what){
+			case MSG_WHAT_PROGRESS_FIRST:
+				mProgressDialog.setSecondaryProgress(msg.arg1);
+				break;
+			case MSG_WHAT_PROGRESS_SECOND:
+				int max = mProgressDialog.getMax();
+				mProgressDialog.setSecondaryProgress(max);
+				mProgressDialog.setProgress(msg.arg1);
+				break;
+			}
 		}
 	};
 	class ProgressUpdateThread extends Thread{
@@ -60,7 +75,7 @@ public abstract class BaseTask extends AsyncTask<Database, Integer, Long> {
 				}
 				final int p = mProgress;
 				lastProgress = p;
-				msg.what = p;
+				msg.arg1 = p;
 				mHander.dispatchMessage(msg);
 				try {
 					Thread.sleep(100);

@@ -11,6 +11,7 @@ public  class GetTask extends BaseTask {
 	public GetTask(Activity activity) {
 		// TODO Auto-generated constructor stub
 		super(activity);
+		msg.what = MSG_WHAT_PROGRESS_FIRST;
 		mProgressDialog.setMax(Cns.COUNT);
 
 	}
@@ -21,10 +22,13 @@ public  class GetTask extends BaseTask {
 		String val[] = new String[1];
 		DecimalFormat decFormat = new DecimalFormat("000000");
 
+		mProgressDialog.setMessage("Constructing Data");
 		for(int i=0;i<Cns.COUNT;i++){
+			publishProgress(i);
 			key[i] = String.valueOf(decFormat.format(i));
-			
 		}
+		msg.what = MSG_WHAT_PROGRESS_SECOND;
+		mProgressDialog.setMessage("Getting Data");
 		Date startDate = new Date();
 		for(int i=0;i<Cns.COUNT;i++){
 			params[0].Get(key[i], val);
