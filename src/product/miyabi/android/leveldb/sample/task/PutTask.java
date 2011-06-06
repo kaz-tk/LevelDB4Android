@@ -1,5 +1,6 @@
 package product.miyabi.android.leveldb.sample.task;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import product.miyabi.android.leveldb.db.Database;
@@ -19,9 +20,10 @@ public  class PutTask extends BaseTask {
 		String key[] = new String[Cns.COUNT];
 		String val[] = new String[Cns.COUNT];
 		
+		DecimalFormat decFormat = new DecimalFormat("000000");
 		for(int i=0;i<Cns.COUNT;i++){
-			key[i] = String.valueOf(i);
-			val[i] = String.valueOf(i+10000);
+			key[i] = String.valueOf(decFormat.format(i));
+			val[i] = String.valueOf(decFormat.format(i+10000));
 		}
 		
 		Date startDate = new Date();

@@ -55,6 +55,14 @@ JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_GetNat
 JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_DeleteNative
   (JNIEnv *, jobject, jstring, jstring, jstring);
 
+/*
+ * Class:     product_miyabi_android_leveldb_db_Database
+ * Method:    GetPropertyNative
+ * Signature: (Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)Z
+ */
+JNIEXPORT jboolean JNICALL Java_product_miyabi_android_leveldb_db_Database_GetPropertyNative
+  (JNIEnv *, jobject, jstring, jstring, jobjectArray);
+
 #ifdef __cplusplus
 }
 #endif

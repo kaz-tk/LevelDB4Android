@@ -83,6 +83,11 @@ public class Database {
 	}
 	
 	
+	
+	public boolean GetProperty(String propkey,String[]value){
+		return GetPropertyNative(mDatabaseName, propkey, value);
+	}
+	
 	//-------------------------------------------
 	// Native Method
 	//-------------------------------------------
@@ -92,4 +97,7 @@ public class Database {
 	private native Status PutNative(WriteOptions writeopts,String dbname,String key,String value);
 	private native Status GetNative(ReadOptions readopts,  String dbname,String key, String[] value);
 	private native Status DeleteNative(String dbname,String key,String value);
+	
+	private native boolean GetPropertyNative(String dbname,String key, String[] value);
+	
 }

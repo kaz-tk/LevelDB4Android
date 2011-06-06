@@ -16,6 +16,10 @@ public abstract class BaseTask extends AsyncTask<Database, Integer, Long> {
 	protected ProgressDialog mProgressDialog;
 	private ProgressUpdateThread mProgressUpdateThread;
 	
+	public interface TaskFinishedCallback{
+		void onFinished();
+	}
+	
 	Handler mHander = new Handler(){
 		
 		@Override
@@ -110,6 +114,9 @@ public abstract class BaseTask extends AsyncTask<Database, Integer, Long> {
 		mProgressUpdateThread.finish();
 		
 		Toast.makeText(mActivity, result + "[ms]",Toast.LENGTH_SHORT).show();
+		
+		((TaskFinishedCallback) mActivity).onFinished();
+		
 	}
 
 }

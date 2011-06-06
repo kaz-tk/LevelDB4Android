@@ -1,5 +1,6 @@
 package product.miyabi.android.leveldb.sample.task;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 import product.miyabi.android.leveldb.db.Database;
@@ -18,12 +19,12 @@ public  class GetTask extends BaseTask {
 		// TODO Auto-generated method stub
 		String key[] = new String[Cns.COUNT];
 		String val[] = new String[1];
-		
+		DecimalFormat decFormat = new DecimalFormat("000000");
+
 		for(int i=0;i<Cns.COUNT;i++){
-			key[i] = String.valueOf(i);
+			key[i] = String.valueOf(decFormat.format(i));
 			
 		}
-		
 		Date startDate = new Date();
 		for(int i=0;i<Cns.COUNT;i++){
 			params[0].Get(key[i], val);

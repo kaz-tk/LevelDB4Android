@@ -13,6 +13,7 @@ leveldb::Options convertReadOptions(jobject options);
 
 jobject convertStatus(JNIEnv* env,leveldb::Status status);
 
+jboolean convertSuccess(JNIEnv* env,bool issuccess);
 
 #ifdef __cplusplus
 

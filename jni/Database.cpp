@@ -53,6 +53,7 @@ JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_OpenNa
       //opts = *options;
         opts.create_if_missing = true;
     } else {
+
       opts.create_if_missing = true;
     }
     leveldb::Options last_options_ = opts;
@@ -109,4 +110,25 @@ JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_GetNat
 
 	return convertStatus(env,status);
 }
+
+
+JNIEXPORT jboolean JNICALL Java_product_miyabi_android_leveldb_db_Database_GetPropertyNative
+  (JNIEnv *env, jobject clazz, jstring jstrdbname, jstring jstrpropkey, jobjectArray jstrarrayvalue){
+
+	jboolean *isCopy;
+	const char* cpropkey = env->GetStringUTFChars(jstrpropkey,isCopy);
+	std::string strpropkey=cpropkey;
+	env->ReleaseStringUTFChars(jstrpropkey,cpropkey);
+	leveldb::Slice nkey= strpropkey;
+	std::string nValue;
+
+	bool issuccess = db_->GetProperty(nkey,&nValue);
+
+	const char* valuec = nValue.c_str();
+	jstring valuestr = env->NewStringUTF(valuec);
+	env->SetObjectArrayElement(jstrarrayvalue,0,valuestr);
+
+	return convertSuccess(env,issuccess);
+}
+
 

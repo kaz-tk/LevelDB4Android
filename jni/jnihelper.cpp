@@ -32,3 +32,12 @@ jobject convertStatus(JNIEnv* env,leveldb::Status status){
 	jstatus = env->NewObject(jstatuscls,jmethodIdInit,jstrStatus);
 	return jstatus;
 }
+
+
+jboolean convertSuccess(JNIEnv* env,bool issuccess){
+	if(issuccess){
+		return 1;
+	}
+	return 0;
+}
+
