@@ -59,6 +59,19 @@ public class Database {
 		return PutNative(writeopts,mDatabaseName, key, value);
 	}
 	
+
+
+	/**
+	 * 
+	 * @param IN writeopts
+	 * @param IN key
+	 * @param IN value
+	 * @return
+	 */
+	public Status Write(WriteOptions writeopts,HashMap<String,String> batch){
+		return WriteNative(writeopts,mDatabaseName, batch);
+	}
+
 	/**
 	 * 
 	 * @param key
@@ -92,6 +105,7 @@ public class Database {
 	private native void ReleaseNative(String dbname);
 
 	private native Status PutNative(WriteOptions writeopts,String dbname,String key,String value);
+	private native Status WriteNative(WriteOptions writeopts,String dbname,HashMap<String,String> batch);
 	private native Status GetNative(ReadOptions readopts,  String dbname,String key, String[] value);
 	private native Status DeleteNative(String dbname,String key,String value);
 }

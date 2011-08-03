@@ -90,6 +90,23 @@ JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_PutNat
 }
 
 
+JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_WriteNative
+(
+	 JNIEnv *env,				///! JNI 
+	 jobject clazz,			///! 
+	 jobject writeopts,	///! 書き込み用のオプション 
+	 jstring dbname,		///! データベース名
+	 jobject jbatch			///! HashMap Object
+){
+	// convert Java HashMap Object(for WriteBatch ) to native BatchData
+	//leveldb::WriteBatch writeBatch = convertWriteBatch(jbatch);
+	//
+	leveldb::Status status = db_->Write(nwriteopts,&writeBatch);
+
+	return convertStatus(env,status);
+}
+
+
 JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_GetNative
   (JNIEnv *env, jobject clazz, jobject readopts, jstring jdbname, jstring jkey, jobjectArray jstrings){
 	leveldb::ReadOptions nreadopts;
