@@ -1,9 +1,12 @@
 package product.miyabi.android.leveldb.sample;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -104,7 +107,7 @@ public class LevelDBSample extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				new PutsTask(mActivity).execute(mDatabase);
+				//new PutsTask(mActivity).execute(mDatabase);
 			}
 		});
         mButtons[ID_GET_DATAS].setOnClickListener(new View.OnClickListener() {
@@ -112,12 +115,37 @@ public class LevelDBSample extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				AsyncTask<Database, Void, Long> task = new GetsTask(mActivity);
-				task.execute(mDatabase);
+				//new GetsTask(mActivity).task.execute(mDatabase);
 				
 			}
 		});
     }
+    
+    
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+    	// TODO Auto-generated method stub
+    	menu.add(Menu.NONE, 0, Menu.NONE, "Bench");
+    	return super.onMenuOpened(featureId, menu);
+    }
+    
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+    	// TODO Auto-generated method stub
+    	switch(featureId){
+    		case 0:{
+    			startActivity(new Intent(mActivity, product.miyabi.android.leveldb.sample.BenchActivity.class));
+    		}
+    		default:{
+    	    	return super.onMenuItemSelected(featureId, item);
+    		}
+    	}
+    	
+    	
+    	
+    	//return super.onMenuItemSelected(featureId, item);
+    }
+    
     
     @Override
     protected void onDestroy() {

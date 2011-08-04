@@ -8,7 +8,7 @@ package product.miyabi.android.leveldb.db;
  */
 public class Status {
 	private int mByteLengthMsg;
-	private int mDatabaseStatusCode;
+	private Code mDatabaseStatusCode;
 	private String mMsg;
 	
 	public enum Code{
@@ -21,16 +21,13 @@ public class Status {
 	}
 	
 	
-	public Status(String msg){
-		//mDatabaseStatusCode = statusCode;
+	public Status(Code code,String msg){
+		mDatabaseStatusCode = code;
 		mMsg                = msg;
 	}
 
-	public Status factory( int statuscode , String msg){
-		return new Status( msg );
-	}
-	public Status factory( String msg){
-		return new Status( msg );
+	public static Status factory( Code code , String msg){
+		return new Status( code,msg );
 	}
 	
 	/**

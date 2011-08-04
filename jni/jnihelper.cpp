@@ -1,6 +1,9 @@
 #include <jni.h>
 #include <leveldb/db.h>
+#include <leveldb/write_batch.h>
 #include <jnihelper.h>
+#include <string>
+
 
 
 leveldb::Options convertOptions(jobject options);
@@ -31,4 +34,44 @@ jobject convertStatus(JNIEnv* env,leveldb::Status status){
 	}
 	jstatus = env->NewObject(jstatuscls,jmethodIdInit,jstrStatus);
 	return jstatus;
+}
+
+
+/**
+ *
+ */
+leveldb::WriteBatch* convertWriteBatch(JNIEnv* env,jobject jbatch){
+
+	leveldb::WriteBatch* nbatch = new leveldb::WriteBatch();
+
+	jclass clzBatchSerializer = env->GetObjectClass(jbatch);
+
+	jmethodID midGetSize = env->GetMethodID(clzBatchSerializer,"getSize","()I");
+	jmethodID midGetKeys = env->GetMethodID(clzBatchSerializer,"getKeys","()[Ljava/lang/String;");
+	jmethodID midGetValues = env->GetMethodID(clzBatchSerializer,"getValues","()[Ljava/lang/String;");
+
+	jint         jsize   = env->CallIntMethod(jbatch,midGetSize);
+	jobjectArray jKeys   = (jobjectArray)env->CallObjectMethod(jbatch,midGetKeys  ,NULL);
+	jobjectArray jValues = (jobjectArray)env->CallObjectMethod(jbatch,midGetValues,NULL);
+
+
+	// TODO case of NULL key/value
+	for(int i=0;i<jsize;i++){
+
+		jstring jkey = (jstring)env->GetObjectArrayElement(jKeys,i);
+		jstring jvalue = (jstring)env->GetObjectArrayElement(jValues,i);
+
+		//convert JString to char*
+		std::string key   = env->GetStringUTFChars(jkey,  NULL);
+		std::string value =  env->GetStringUTFChars(jvalue,NULL);
+
+		const leveldb::Slice sliceKey   = key;
+		const leveldb::Slice sliceValue = value;
+		nbatch->Put(sliceKey,sliceValue);
+
+		//env->ReleaseStringUTFChars(jkey,key);
+		//env->ReleaseStringUTFChars(jvalue,value);
+	}
+
+	return nbatch;
 }

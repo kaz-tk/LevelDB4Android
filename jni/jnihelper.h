@@ -11,8 +11,8 @@ leveldb::Options convertOptions(jobject options);
 leveldb::Options convertWriteOptions(jobject options);
 leveldb::Options convertReadOptions(jobject options);
 
-jobject convertStatus(JNIEnv* env,leveldb::Status status);
-
+jobject convertStatus(JNIEnv*,leveldb::Status);
+leveldb::WriteBatch* convertWriteBatch(JNIEnv* ,jobject);
 
 #ifdef __cplusplus
 

@@ -41,6 +41,14 @@ JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_PutNat
 
 /*
  * Class:     product_miyabi_android_leveldb_db_Database
+ * Method:    WriteNative
+ * Signature: (Lproduct/miyabi/android/leveldb/db/options/WriteOptions;Ljava/lang/String;Lproduct/miyabi/android/leveldb/db/internal/WriteBatchSerializer;)Lproduct/miyabi/android/leveldb/db/Status;
+ */
+JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_WriteNative
+  (JNIEnv *, jobject, jobject, jstring, jobject);
+
+/*
+ * Class:     product_miyabi_android_leveldb_db_Database
  * Method:    GetNative
  * Signature: (Lproduct/miyabi/android/leveldb/db/options/ReadOptions;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)Lproduct/miyabi/android/leveldb/db/Status;
  */

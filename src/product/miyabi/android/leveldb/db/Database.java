@@ -2,6 +2,7 @@ package product.miyabi.android.leveldb.db;
 
 import android.util.Log;
 import android.widget.Toast;
+import product.miyabi.android.leveldb.db.internal.WriteBatchSerializer;
 import product.miyabi.android.leveldb.db.options.Options;
 import product.miyabi.android.leveldb.db.options.ReadOptions;
 import product.miyabi.android.leveldb.db.options.WriteOptions;
@@ -68,8 +69,11 @@ public class Database {
 	 * @param IN value
 	 * @return
 	 */
-	public Status Write(WriteOptions writeopts,HashMap<String,String> batch){
-		return WriteNative(writeopts,mDatabaseName, batch);
+	public Status Write(WriteOptions writeopts,WriteBatch batch){
+		if(batch==null){
+			return Status.factory(Status.Code.INVALIDARGUMENT,"Argument is Null");
+		}
+		return WriteNative(writeopts,mDatabaseName, WriteBatchSerializer.factory(batch));
 	}
 
 	/**
@@ -105,7 +109,7 @@ public class Database {
 	private native void ReleaseNative(String dbname);
 
 	private native Status PutNative(WriteOptions writeopts,String dbname,String key,String value);
-	private native Status WriteNative(WriteOptions writeopts,String dbname,HashMap<String,String> batch);
+	private native Status WriteNative(WriteOptions writeopts,String dbname,WriteBatchSerializer serializedBatch);
 	private native Status GetNative(ReadOptions readopts,  String dbname,String key, String[] value);
 	private native Status DeleteNative(String dbname,String key,String value);
 }
