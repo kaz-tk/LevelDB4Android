@@ -163,7 +163,6 @@ LOCAL_MODULE:= leveldb-db
 #									version_edit_test.cc
 
 DB_SRC_FILES:=builder.cc \
-							db_bench.cc \
 							db_impl.cc \
 							db_iter.cc \
 							filename.cc \
@@ -176,6 +175,9 @@ DB_SRC_FILES:=builder.cc \
 							version_edit.cc \
 							version_set.cc \
 							write_batch.cc 
+
+#							db_bench.cc \
+
 
 LOCAL_SRC_FILES=$(DB_SRC_FILES:%=../db/%)
 
@@ -221,12 +223,13 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../platforms/android-9/arch-arm/usr/include
 	$(LOCAL_PATH)/../db/ \
 	$(LOCAL_PATH)/../table/
 
-LOCAL_CFLAGS += $(LOCAL_C_INCLUDES:%=-I%) \
+
+LOCAL_CPPFLAGS += $(LOCAL_C_INCLUDES:%=-I%) \
 	-DLEVELDB_PLATFORM_ANDROID \
 	-DARMV6_OR_7
 
-LOCAL_SHARED_LIBRARIES := -llog
-LOCAL_LD_LIBS:=  -llog
+#LOCAL_SHARED_LIBRARIES :=
+LOCAL_LDLIBS:=  -llog
 
 LOCAL_STATIC_LIBS:= -lstdlib -llog
 LOCAL_STATIC_LIBRARIES:=  leveldb-db leveldb-table leveldb-util leveldb-port  

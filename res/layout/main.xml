@@ -11,18 +11,19 @@
         <TextView android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Operation Put / Get"></TextView>
         <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout5" android:layout_width="match_parent">
             <LinearLayout android:layout_height="match_parent" android:padding="10px" android:orientation="vertical" android:layout_weight="1" android:id="@+id/linearLayout4" android:layout_width="wrap_content">
-                <Button android:layout_height="wrap_content" android:text="Button" android:layout_width="fill_parent" android:id="@+id/button1"></Button>
+                <Button android:layout_height="wrap_content" android:text="Button" android:layout_width="fill_parent" android:id="@+id/putSingle"></Button>
             </LinearLayout>
             <LinearLayout android:layout_height="match_parent" android:padding="10px" android:orientation="vertical" android:layout_weight="1" android:id="@+id/linearLayout3" android:layout_width="wrap_content">
-                <Button android:layout_height="wrap_content" android:text="Button" android:layout_width="fill_parent" android:id="@+id/button2"></Button>
+                <Button android:layout_height="wrap_content" android:text="Button" android:layout_width="fill_parent" android:id="@+id/getSingle"></Button>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent" android:id="@+id/linearLayout6" android:layout_height="wrap_content" android:orientation="vertical">
         <TextView android:text="TextView" android:id="@+id/textView3" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
         <LinearLayout android:id="@+id/linearLayout7" android:layout_height="match_parent" android:layout_width="fill_parent">
-            <Button android:text="Button" android:id="@+id/button3" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="fill_parent" android:layout_margin="10px"></Button>
-            <Button android:text="Button" android:id="@+id/button4" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="fill_parent" android:layout_margin="10px"></Button>
+            <Button android:text="Button" android:id="@+id/putMulti" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="fill_parent" android:layout_margin="10px"></Button>
+            <Button android:layout_margin="10px" android:id="@+id/writeMulti" android:text="Button" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1"></Button>
         </LinearLayout>
+        <Button android:layout_margin="10px" android:id="@+id/getMulti" android:text="Button" android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_weight="1"></Button>
     </LinearLayout>
 </LinearLayout>

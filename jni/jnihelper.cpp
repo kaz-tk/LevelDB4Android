@@ -10,6 +10,17 @@ leveldb::Options convertOptions(jobject options);
 leveldb::Options convertWriteOptions(jobject options);
 leveldb::Options convertReadOptions(jobject options);
 
+int convertCode(leveldb::Status status){
+	if(status.ok()){
+		return 0;	// leveldb::Code::kOk
+	}else if(status.IsNotFound()){
+		return 1;
+
+	}else{//TODO
+		return 2;
+	}
+}
+
 jobject convertStatus(JNIEnv* env,leveldb::Status status){
 	jobject jstatus;
 
@@ -19,20 +30,23 @@ jobject convertStatus(JNIEnv* env,leveldb::Status status){
     jstring jstrStatus = env->NewStringUTF(charStatus);
 
 	jclass jstatuscls = env->FindClass("product/miyabi/android/leveldb/db/Status");
-//	jclass jstatuscls = env->FindClass("Lproduct/miyabi/android/leveldb/db/Status;");
-	jmethodID jmethodIdInit;
+	/*
+	jmethodID jmethodIdFactory;
 	if (jstatuscls==NULL ){
 		return NULL;
 	}
-	/*
-	jmethodIdInit =  env->GetMethodID(jstatuscls,"factory","(Ljava/lang/String;)Lproduct/miyabi/android/leveldb/db/Status");
-	jstatus = env->CallStaticObjectMethod(jstatuscls,jmethodIdInit,jstrStatus);
+
+	jmethodIdFactory =  env->GetMethodID(jstatuscls,"factory","(ILjava/lang/String;)Lproduct/miyabi/android/leveldb/db/Status;");
+	if(jmethodIdFactory ==NULL){
+		return NULL;
+	}
+	jstatus = env->CallStaticObjectMethod(jstatuscls,jmethodIdFactory,convertCode(status),jstrStatus);
 	*/
-	jmethodIdInit =  env->GetMethodID(jstatuscls,"<init>","(Ljava/lang/String;)V");
+	jmethodID jmethodIdInit =  env->GetMethodID(jstatuscls,"<init>","(ILjava/lang/String;)V");
 	if(jmethodIdInit==NULL){
 		return NULL;
 	}
-	jstatus = env->NewObject(jstatuscls,jmethodIdInit,jstrStatus);
+	jstatus = env->NewObject(jstatuscls,jmethodIdInit,convertCode(status),jstrStatus);
 	return jstatus;
 }
 

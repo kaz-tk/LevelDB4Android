@@ -2,6 +2,8 @@ package product.miyabi.android.leveldb.db.internal;
 
 import java.util.Set;
 
+import android.util.Log;
+
 import product.miyabi.android.leveldb.db.WriteBatch;
 
 public class WriteBatchSerializer {
@@ -27,6 +29,7 @@ public class WriteBatchSerializer {
 		if(batch == null){
 			return null;
 		}
+		Log.d("LevelDB","factory WriteBatchSerializer");
 		return new WriteBatchSerializer(batch);
 	}
 

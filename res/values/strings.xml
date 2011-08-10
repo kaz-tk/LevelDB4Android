@@ -6,6 +6,7 @@
         <item>Put(Hello , World)</item>
         <item>Get(Hello,&amp;Value)</item>
         <item>Put</item>
+        <item>Write</item>
         <item>Get</item>
     </string-array>
     <string-array name="itemlabel">

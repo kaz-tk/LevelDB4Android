@@ -12,8 +12,7 @@ public class BenchActivity extends Activity {
 	protected void onCreate(android.os.Bundle savedInstanceState) {
 		setContentView(R.layout.bench_activity);
 		mBenchSelectSpinner = (Spinner)findViewById(R.id.spinner1);
-		
-		
+	
 		String[] items = getResources().getStringArray(R.array.bench_items);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item);
 		
@@ -22,8 +21,6 @@ public class BenchActivity extends Activity {
 			adapter.add(item);
 		}
 		mBenchSelectSpinner.setAdapter(adapter);
-		
-		
 		
 	};
 }

@@ -30,10 +30,16 @@ public class Database {
 			Options options,
 			String dbname
 	){
-		
+		mDatabaseName = dbname;
+		Log.d("LevelDB",mDatabaseName + "Open");
 		return OpenNative(options, dbname);
 	}
 
+	/**
+	 * 
+	 * @param dbname
+	 * TODO No Need Database Name, because member field has it.
+	 */
 	public void Release(String dbname){
 		ReleaseNative(dbname);
 	}
@@ -73,6 +79,8 @@ public class Database {
 		if(batch==null){
 			return Status.factory(Status.Code.INVALIDARGUMENT,"Argument is Null");
 		}
+		Log.d("LevelDB", "Write Native\n DatabaseName:"+mDatabaseName);
+
 		return WriteNative(writeopts,mDatabaseName, WriteBatchSerializer.factory(batch));
 	}
 

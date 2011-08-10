@@ -17,17 +17,50 @@ public class Status {
 		CORRUPTION,
 		NOTSUPPORTED,
 		INVALIDARGUMENT,
-		IOERROR
+		IOERROR;
+		
+		static public Code factory(int code){
+			
+			switch(code){
+			case 0:
+				return Code.OK;
+			case 1:
+				return Code.NOTFOUND;
+			case 2:
+				return Code.CORRUPTION;
+			case 3:
+				return Code.NOTSUPPORTED;
+			case 4:
+				return Code.INVALIDARGUMENT;
+			case 5:
+				return Code.IOERROR;
+			default:
+				return Code.CORRUPTION;
+			}
+		}
 	}
 	
 	
-	public Status(Code code,String msg){
+	private Status(Code code,String msg){
 		mDatabaseStatusCode = code;
 		mMsg                = msg;
 	}
+	Status(int code,String msg){
+		mDatabaseStatusCode = Code.factory(code);
+		mMsg                = msg;
+	}
 
-	public static Status factory( Code code , String msg){
+	
+	
+	
+	//Call from Native
+	public static Status factory(int code , String msg){
 		return new Status( code,msg );
+	}
+	
+	//Call from Java
+	public static Status factory(Code code , String msg){
+		return new Status(code,msg );
 	}
 	
 	/**

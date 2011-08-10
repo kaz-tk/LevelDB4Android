@@ -15,6 +15,8 @@
 #include <android/log.h>
 leveldb::DB* db_;
 
+
+
 JNIEXPORT jintArray JNICALL Java_product_miyabi_android_leveldb_db_Database_VERSION
   (JNIEnv *env, jclass clazz)
 {
@@ -89,6 +91,8 @@ JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_PutNat
 	return convertStatus(env,status);
 }
 
+
+
 JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_WriteNative
 (
 	 JNIEnv *env,			///! JNI
@@ -97,12 +101,20 @@ JNIEXPORT jobject JNICALL Java_product_miyabi_android_leveldb_db_Database_WriteN
 	 jstring dbname,		///! データベース名
 	 jobject jbatch			///! HashMap Object
 ){
+
+    __android_log_write(ANDROID_LOG_DEFAULT,"LevelDB","Write Native Start");
+    //__android_log_write(android_LogPriority.ANDROID_LOG_DEBUG,"Tag","Message");
+
 	// convert Java WriteBatchSerializer  to native leveldb::WriteBatch
 	leveldb::WriteBatch* writeBatch = convertWriteBatch(env,jbatch);
+    __android_log_write(ANDROID_LOG_DEFAULT,"LevelDB","Convert finished WriteBatch");
+
 
 	leveldb::WriteOptions nwriteopts;
+    __android_log_write(ANDROID_LOG_DEFAULT,"LevelDB","WriteBench");
 	leveldb::Status status = db_->Write(nwriteopts,writeBatch);
 
+    __android_log_write(ANDROID_LOG_DEFAULT,"LevelDB","Finished Write Bench");
 	return convertStatus(env,status);
 }
 
